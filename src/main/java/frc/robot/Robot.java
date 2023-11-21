@@ -4,8 +4,11 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -72,6 +75,28 @@ public class Robot extends TimedRobot {
     intakeMotor = new CANSparkMax(3, MotorType.kBrushless);
     sensorIntake = new DigitalInput(9);
     driverController = new XboxController(0);
+
+    // Around this time you may encounter some undefined class erros
+    //Hover over the error and go QUICK FIX
+    // If an import appears, import it and see if the error goes away
+    // If not, contact a lead :(
+    
+    leftBackDriving.follow(leftFrontDriving); 
+    // The back motor should be slaved to the front master mtor.
+    rightBackDriving.follow(rightFrontDriving);
+    // repeat on right side
+
+    // Since the Motors are facing the wrong direction, we should invert the motors in order for them to face the correc directions
+    leftFrontDriving.setInverted(true);
+    leftBackDriving.setInverted(true); 
+
+    //Motors spin so we should prevent the motors from free-rolling everywhere
+    // When 0 current is flowing through, it will be set on a lock mode
+    rightFrontDriving.setNeutralMode(NeutralMode.Brake);
+    rightBackDriving.setNeutralMode(NeutralMode.Brake);
+    leftFrontDriving.setNeutralMode(NeutralMode.Brake);
+    leftBackDriving.setNeutralMode(NeutralMode.Brake);
+
   } 
 
   /**
@@ -125,7 +150,19 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    // Tank Drive Code - 
+    //Left Joy controls the left side 
+    // Right Joy control the right side
+    // Postitve Number = Forward -- Negative Number = Reverse
+    double leftWheelsControl = driverController.getLeftY();
+    double rightWheelsControl = driverController.getRightY();
+    //Lines above grabs the + or - value from the Y-axis of the Joysticks
+    // then set that value directly into the motor controller
+    rightFrontDriving.set(ControlMode.PercentOutput, rightWheelsControl);
+    leftFrontDriving.set(ControlMode.PercentOutput, leftWheelsControl);
+    // AND UR DONE
+  }
 
   @Override
   public void testInit() {
