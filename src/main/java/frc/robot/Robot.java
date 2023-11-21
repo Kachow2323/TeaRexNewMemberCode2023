@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -67,6 +68,7 @@ public class Robot extends TimedRobot {
 
     // So this were the electronics portion happens
     // Confirm ID numbers for identification
+    // Notice how this is similiar to Scanner?!?!
     rightFrontDriving = new TalonFX(4);
     rightBackDriving = new TalonFX(2);
     leftFrontDriving = new TalonFX(3);
@@ -151,17 +153,31 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    // Tank Drive Code - 
-    //Left Joy controls the left side 
-    // Right Joy control the right side
-    // Postitve Number = Forward -- Negative Number = Reverse
-    double leftWheelsControl = driverController.getLeftY();
-    double rightWheelsControl = driverController.getRightY();
-    //Lines above grabs the + or - value from the Y-axis of the Joysticks
-    // then set that value directly into the motor controller
-    rightFrontDriving.set(ControlMode.PercentOutput, rightWheelsControl);
-    leftFrontDriving.set(ControlMode.PercentOutput, leftWheelsControl);
-    // AND UR DONE
+    // Arcade drive is drive style that allows you to drive forward with one joy while turning with a different one
+    // We will use left joystick's Y for going forward and backward
+    // & use the right joystick's X for turning controls
+    double leftWheelsControlArcade = driverController.getLeftY();
+    double rightWheelsControlArcade = driverController.getRightX();
+    double left = leftWheelsControlArcade + rightWheelsControlArcade ;
+    double right = leftWheelsControlArcade - rightWheelsControlArcade;
+
+    //Setting hard limits on controls so the maximum power the motors can receive is 1
+    if(left > 1.0){
+      left = 1.0; //sets a hard limit since it will go over 1
+    }else if(right > 1.0){
+      right = 1.0; // same, sets a hard limit
+    }else if(left < -1.0){
+      left = -1.0; // same, sets a hard limit
+    }else if(right < -1.0){
+      right = -1.0; // same, sets a hard limit
+    }
+
+    rightFrontDriving.set(ControlMode.PercentOutput, right);
+    leftFrontDriving.set(ControlMode.PercentOutput, left);
+
+    // Smart Dashboard is a Dashboard that displays values you want in real time
+    SmartDashboard.putNumber("Right Wheel Speed", rightWheelsControlArcade);
+    SmartDashboard.putNumber("Left Wheel Speed", leftWheelsControlArcade);
   }
 
   @Override
