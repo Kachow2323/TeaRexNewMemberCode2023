@@ -25,7 +25,12 @@ To Do:
 - The robot when unpowered can roll around, but we don't want that happening when its powered on, we can set it to "brake" mode using the Neutral Mode command.
 - Motors can be a given a signal ranging between **1 thru -1** with all decimal values included. 1 being full forward, -1 being full reverse, 0 being neutral.
 - Create a command to grab each Y position of the X-box controller. ex: **.getLeftY**
-- Set the output of the the 
+- Set the output porportinal to the Y pos of the X-box controller using the command above.
+
+  **STOP** - CHECK IN WITH A PROGRAMMING LEAD OR MENTOR TO CHECK YOUR CODE!
+  - Prelimenary Tests: Check that it builds correctly. Check that the Falcon ID's are correct! Critical!!!
+ 
+ RUN YOUR CODE ON THE BOT!!!
 
 //v1.0 - NewMem2023KitBotTank
   TBD: Auton routines
