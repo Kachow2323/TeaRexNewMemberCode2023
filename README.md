@@ -27,12 +27,26 @@ To Do:
 - Motors can be a given a signal ranging between **1 thru -1** with all decimal values included. 1 being full forward, -1 being full reverse, 0 being neutral.
 - **This is where things start to change: Instead of Grabbing only the Y-axis positiions, we want to get the Left Y but we want to grab the Right X value**
 - Start by grabbing both the Left Y & Right X values
-- In order to shift the bot to the left, the left side needs more power
+- We can now create a vraible which holds a value between -1 to 1 for our power for each side
+- Idea: More Power on 1 side will push that side to turn faster.
+- Idea: Equal Power on both sides = Straight line.
+- For the left side, it will be the Left Y + the Right X values
+- For the right side, it will be the Left Y - Right X values
+- However, hypotheitically, we can get values higher than 1. Ex: Full Forward + Full Right = 2.0+
+- We want to limit the rate we turn so we can set a simple hard limit for each left and right side.
+- Make a system to set the limits to 1 to -1.
+- Set the motors speed proportional to the right and left side values.
+- Voila Done.
+
+    SMART DASHBOARD
+  - SmartDashboard is a realtime "whiteboard". You can choose what values you would like to put on the Dashboard using the SmartDashboard.put____
+  - Put your speed of the wheels on the dashboard
+  - That's it, done for real now
 
   **STOP** - CHECK IN WITH A PROGRAMMING LEAD OR MENTOR TO CHECK YOUR CODE!
   - Prelimenary Tests: Check that it builds correctly. Check that the Falcon ID's are correct! Critical!!!
  
  RUN YOUR CODE ON THE BOT!!!
 
-//v1.0 - NewMem2023KitBotTank
+//v1.1 - NewMem2023KitBotArcade
   TBD: Auton routines
