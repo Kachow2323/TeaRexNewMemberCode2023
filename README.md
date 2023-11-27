@@ -18,9 +18,11 @@ To Do:
 Start by Declaring all the motors, speed controllers, and other controllers (X-box controller)
 Note: 4 motors = 4 different objects to be declared.
 Initiate Motors with their proper ID #. Numbers are labeled on the motors physically. Can also be retrieved thru wire connection and Phoenix Tuner
+Tip: Name these motors extremely specific with their physical positions. Do not say "motor 1,2,3..etc". Good examples include names such a "m_frontLeftDriveMotor" or "m_armTurningMotor".
 Initiate Controller (X-Box) with correct port 3. Port 0 = Drive Port 1 = Operator
 Slave the Left Back and Right Back Motor to the Front. Thus we can send 1 signal to either left or right side without having to specify each and every motor.
+The robot when unpowered can roll around, but we don't want that happening when its powered on, we can set it to "brake" mode using the Neutral Mode command.
+Motors can be a given a signal ranging between 1 thru -1 with all decimal values included. 1 being full forward, -1 being full reverse, 0 being neutral.
 
-
-
+//v1.0 - NewMem2023KitBotTank
 TBD: Auton routines
