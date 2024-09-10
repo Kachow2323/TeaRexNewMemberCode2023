@@ -37,24 +37,12 @@ public class Robot extends TimedRobot {
   private TalonFX rightBackDriving;
   private TalonFX leftFrontDriving;
   private TalonFX leftBackDriving;
-
-  // These above-mentioned motor types are primarily used for Drive
-  //However, smaller versatile motors may come in handy
-  // Ex: NEO 550 (small) or NEO 650 (big)
-
-  private CANSparkMax armTurning;
-  private CANSparkMax intakeMotor;
-  // NEO's require SPARK Max's for comms so declare SM's instead of NEOS
-
+  
   //To control the robot, we use Xbox Controllers.
   //The controls are already mapped for us and all we have to do is import
 
   private XboxController driverController; //often called player1 by Ryan Chan :D
   // Note Driver must be Port 0 while Op is Port 1
-
-  //In the future there may also be sensors so here is an example.
-
-  private DigitalInput sensorIntake; //example only
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -73,9 +61,6 @@ public class Robot extends TimedRobot {
     rightBackDriving = new TalonFX(2);
     leftFrontDriving = new TalonFX(3);
     leftBackDriving = new TalonFX(1);
-    armTurning = new CANSparkMax(1, MotorType.kBrushless);
-    intakeMotor = new CANSparkMax(3, MotorType.kBrushless);
-    sensorIntake = new DigitalInput(9);
     driverController = new XboxController(0);
 
     // Around this time you may encounter some undefined class erros
